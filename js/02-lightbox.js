@@ -5,8 +5,9 @@ console.log(galleryItems);
 
 const listGalleryRef = document.querySelector('.gallery')
 
-listGalleryRef.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems))
 listGalleryRef.addEventListener('click', simpleGalleryHandler)
+listGalleryRef.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems))
+
 
 function createGalleryMarkup(galleryItems) {
     return galleryItems.map(({ preview, original, description }) => {
@@ -19,13 +20,16 @@ function createGalleryMarkup(galleryItems) {
 }
 
 function simpleGalleryHandler(event) { 
-    event.preventDefault()
-
-    if (event.target !== "IMG") { 
-        return
+    event.preventDefault();
+console.log(123)
+    if (event.target.nodeName !== "IMG") { 
+      return
     }
-    let gallery = new SimpleLightbox('.gallery a');
-gallery.on('show.simplelightbox', function () {
-	// event.target.dataset.source = 
-});
+    
+    let lightbox = new SimpleLightbox('.gallery a', {
+        captions: true,
+        captionPosition: 'bottom',
+        captionDelay: 250,
+        captionsData: 'alt',
+   });
 }
