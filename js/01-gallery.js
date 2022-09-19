@@ -1,22 +1,18 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
-
 
 console.log(galleryItems);
 
+const galleryRef = document.querySelector(".gallery");
 
-const galleryRef = document.querySelector('.gallery')
+galleryRef.addEventListener("click", onImgClickHandler);
 
-galleryRef.addEventListener('click', onImgClickHandler)
+galleryRef.insertAdjacentHTML("beforeend", createGalleryMarkup(galleryItems));
 
-galleryRef.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems))
-
-
-
-
-function createGalleryMarkup(galleryItems) { 
-    return galleryItems.map(({ preview, original, description }) => {
-        return `
+function createGalleryMarkup(galleryItems) {
+  return galleryItems
+    .map(({ preview, original, description }) => {
+      return `
     <div class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
@@ -27,33 +23,29 @@ function createGalleryMarkup(galleryItems) {
     />
   </a>
 </div> 
-`
-    }).join('');
+`;
+    })
+    .join("");
 }
 
 
-function onImgClickHandler(e) { 
-    e.preventDefault();
+function onImgClickHandler(e) {
+  e.preventDefault();
 
   if (e.target.nodeName !== "IMG") {
     return;
   } else {
-   const instance = basicLightbox.create(`
+    const instance = basicLightbox.create(`
     <div class="modal">
         <img src="${e.target.dataset.source}" width="1280" height="850">
     </div>
-`)
-   instance.show()
+`);
+    instance.show();
+
+    window.addEventListener("keydown", function (e) {
+      if (e.code === "Escape") {
+        document.querySelector("div .modal").onClick = instance.close();
+      }
+    });
   }
-
-  // document.addEventListener('keydown', (event) => { if (event.code === "Escape") { 
-  //   console.log(document.querySelector("div .modal").onClick = instance.close())
-  // }})
-
-  
-
-
-        
-    
 }
-

@@ -19,17 +19,19 @@ function createGalleryMarkup(galleryItems) {
     }).join('');
 }
 
-function simpleGalleryHandler(event) { 
-    event.preventDefault();
-console.log(123)
-    if (event.target.nodeName !== "IMG") { 
-      return
-    }
-    
-    let lightbox = new SimpleLightbox('.gallery a', {
+
+ let lightbox = new SimpleLightbox('.gallery a', {
         captions: true,
         captionPosition: 'bottom',
         captionDelay: 250,
         captionsData: 'alt',
-   });
+ });
+   
+function simpleGalleryHandler(event) { 
+    event.preventDefault();
+
+    if (event.target.nodeName !== "IMG") { 
+      return
+    }
+    
 }
