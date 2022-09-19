@@ -44,7 +44,7 @@ function onImgClickHandler(e) {
 
     window.addEventListener("keydown", function (e) {
       if (e.code === "Escape") {
-        document.querySelector("div .modal").onClick = instance.close();
+        instance.close()
       }
     });
   }
