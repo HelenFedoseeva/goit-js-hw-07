@@ -39,13 +39,26 @@ function onImgClickHandler(e) {
     <div class="modal">
         <img src="${e.target.dataset.source}" width="1280" height="850">
     </div>
-`);
+// `);
+    
     instance.show();
 
-    window.addEventListener("keydown", function (e) {
+    window.addEventListener("keydown", onKeyDownHandler);
+    
+    
+    function onKeyDownHandler (e) {
       if (e.code === "Escape") {
         instance.close()
       }
-    });
+       window.removeEventListener('keydown',  onKeyDownHandler)
+    }
+
+    
   }
+
+
+  
 }
+
+
+
